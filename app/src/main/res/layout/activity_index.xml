@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/index_bg_color"
+    android:orientation="vertical"
+    tools:context="com.acm.scoresystem.IndexActivity">
+
+    <LinearLayout
+        android:id="@+id/firstL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/hello"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="@string/hiMsg"
+                android:textColor="@color/index_text_color"
+                android:textSize="36sp" />
+
+            <TextView
+                android:id="@+id/coderName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:layout_toEndOf="@+id/hello"
+                android:text="@string/hiMsg"
+                android:textColor="@color/username_color"
+                android:textSize="36sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp">
+
+            <Button
+                android:id="@+id/statisticBtn"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="7dp"
+                android:background="@drawable/rounded_text"
+                android:backgroundTint="@color/index_btn_color"
+                android:drawableStart="@drawable/ic_face_black_40dp"
+                android:paddingStart="10dp"
+                tools:ignore="RtlSymmetry,UnusedAttribute" />
+
+            <Button
+                android:id="@+id/topCodersBtn"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="7dp"
+                android:layout_marginStart="7dp"
+                android:layout_toEndOf="@id/statisticBtn"
+                android:background="@drawable/rounded_text"
+                android:backgroundTint="@color/index_btn_color"
+                android:drawableStart="@drawable/ic_star_black_24dp"
+                android:paddingStart="10dp"
+                tools:ignore="RtlSymmetry,UnusedAttribute" />
+
+            <Button
+                android:id="@+id/noficationsBtn"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="7dp"
+                android:layout_toEndOf="@id/topCodersBtn"
+                android:background="@drawable/rounded_text"
+                android:backgroundTint="@color/index_btn_color"
+                android:drawableStart="@drawable/ic_notifications_active_black_24dp"
+                android:paddingStart="10dp"
+                tools:ignore="RtlSymmetry,UnusedAttribute" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/secondL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:contentDescription="@string/footer"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg2" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/ic_exit_to_app_black_24dp" />
+
+</RelativeLayout>

@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.acm.scoresystem.StatisticsActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="-120dp"
+        android:contentDescription="@string/background"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg" />
+
+    <TextView
+        android:id="@+id/statistics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:text="@string/statistics"
+        android:textColor="@color/index_text_color"
+        android:textSize="@dimen/titles_dimens" />
+
+    <RelativeLayout
+        android:id="@+id/holeThing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/statistics"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="33dp">
+
+
+        <RelativeLayout
+            android:id="@+id/scores"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+
+            <RelativeLayout
+                android:id="@+id/scoreLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/rounded_text2"
+                android:backgroundTint="@color/btn_login"
+                tools:targetApi="lollipop">
+
+                <TextView
+                    android:id="@+id/textCodeforcesScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginEnd="@dimen/titles_diff"
+                    android:layout_marginStart="@dimen/titles_diff"
+                    android:layout_marginTop="@dimen/titles_diff"
+                    android:text="@string/codefrocesScore"
+                    android:textColor="@color/index_text_color"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/codeforcesScore"
+                    android:layout_width="@dimen/titles_size"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textCodeforcesScore"
+                    android:layout_margin="@dimen/titles_diff"
+                    android:background="@drawable/rounded_text2"
+                    android:backgroundTint="@color/index_text_color"
+                    android:gravity="center"
+                    android:padding="@dimen/titles_diff"
+                    android:text="@string/codeforces_score"
+                    android:textColor="@color/btn_login"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@+id/scoreLayout"
+                android:background="@drawable/rounded_text2"
+                android:backgroundTint="@color/btn_login"
+                tools:targetApi="lollipop">
+
+                <TextView
+                    android:id="@+id/textAcmScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginEnd="@dimen/titles_diff"
+                    android:layout_marginStart="@dimen/titles_diff"
+                    android:layout_marginTop="@dimen/titles_diff"
+                    android:text="@string/acmScore"
+                    android:textColor="@color/index_text_color"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/acmScore"
+                    android:layout_width="@dimen/titles_size"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textAcmScore"
+                    android:layout_margin="@dimen/titles_diff"
+                    android:background="@drawable/rounded_text2"
+                    android:backgroundTint="@color/index_text_color"
+                    android:gravity="center"
+                    android:padding="@dimen/titles_diff"
+                    android:text="@string/name_user"
+                    android:textColor="@color/btn_login"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/line1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/scores"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp">
+
+            <RelativeLayout
+                android:id="@+id/A"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/column_diff"
+                android:background="@drawable/rounded_text"
+                android:backgroundTint="@color/A"
+                tools:targetApi="lollipop">
+
+                <TextView
+                    android:id="@+id/labelA"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="6dp"
+                    android:background="@drawable/rounded_text"
+                    android:backgroundTint="@color/index_text_color"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp"
+                    android:text="A"
+                    android:textColor="@color/A"
+                    android:textSize="20sp"
+                    tools:targetApi="lollipop" />
+
+                <TextView
+                    android:id="@+id/scoreA"
+                    android:layout_width="@dimen/score_size"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_toEndOf="@id/labelA"
+                    android:background="@drawable/rounded_text"
+                    android:backgroundTint="@color/index_text_color"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp"
+                    android:text="@string/initial_val"
+                    android:textColor="@color/A"
+                    android:textSize="20sp"
+                    tools:targetApi="lollipop" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/column_diff"
+                android:layout_toEndOf="@id/A"
+                android:background="@drawable/rounded_text"
+                android:backgroundTint="@color/B"
+                tools:targetApi="lollipop">
+
+                <TextView
+                    android:id="@+id/labelB"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="6dp"
+                    android:background="@drawable/rounded_text"
+                    android:backgroundTint="@color/index_text_color"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp"
+                    android:text="B"
+                    android:textColor="@color/B"
+                    android:textSize="20sp"
+                    tools:targetApi="lollipop" />
+
+                <TextView
+                    android:id="@+id/scoreB"
+                    android:layout_width="@dimen/score_size"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_toEndOf="@id/labelB"
+                    android:background="@drawable/rounded_text"
+                    android:backgroundTint="@color/index_text_color"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp"
+                    android:text="@string/initial_val"
+                    android:textColor="@color/B"
+                    android:textSize="20sp"
+                    tools:targetApi="lollipop" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/line2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/line1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/line_diff">
+
+            <RelativeLayout
+                android:id="@+id/C"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/column_diff"
+                android:background="@drawable/rounded_text"
+                android:backgroundTint="@color/C"
+                tools:targetApi="lollipop">
+
+
+                <TextView
+                    android:id="@+id/labelC"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="6dp"
+                    android:background="@drawable/rounded_text"
+                    android:backgroundTint="@color/index_text_color"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp"
+                    android:text="C"
+                    android:textColor="@color/C"
+                    android:textSize="20sp"
+                    tools:targetApi="lollipop" />
+
+                <TextView
+                    android:id="@+id/scoreC"
+                    android:layout_width="@dimen/score_size"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_toEndOf="@id/labelC"
+                    android:background="@drawable/rounded_text"
+                    android:backgroundTint="@color/index_text_color"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp"
+                    android:text="@string/initial_val"
+                    android:textColor="@color/C"
+                    android:textSize="20sp"
+                    tools:targetApi="lollipop" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/column_diff"
+                android:layout_toEndOf="@id/C"
+                android:background="@drawable/rounded_text"
+                android:backgroundTint="@color/D"
+                tools:targetApi="lollipop">
+
+                <TextView
+                    android:id="@+id/labelD"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="6dp"
+                    android:background="@drawable/rounded_text"
+                    android:backgroundTint="@color/index_text_color"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp"
+                    android:text="D"
+                    android:textColor="@color/D"
+                    android:textSize="20sp"
+                    tools:targetApi="lollipop" />
+
+                <TextView
+                    android:id="@+id/scoreD"
+                    android:layout_width="@dimen/score_size"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_toEndOf="@id/labelD"
+                    android:background="@drawable/rounded_text"
+                    android:backgroundTint="@color/index_text_color"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp"
+                    android:text="@string/initial_val"
+                    android:textColor="@color/D"
+                    android:textSize="20sp"
+                    tools:targetApi="lollipop" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/line3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/line2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/line_diff">
+
+            <RelativeLayout
+                android:id="@+id/E"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/column_diff"
+                android:background="@drawable/rounded_text"
+                android:backgroundTint="@color/E"
+                tools:targetApi="lollipop">
+
+                <TextView
+                    android:id="@+id/labelE"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="6dp"
+                    android:background="@drawable/rounded_text"
+                    android:backgroundTint="@color/index_text_color"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp"
+                    android:text="E"
+                    android:textColor="@color/E"
+                    android:textSize="20sp"
+                    tools:targetApi="lollipop" />
+
+                <TextView
+                    android:id="@+id/scoreE"
+                    android:layout_width="@dimen/score_size"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_toEndOf="@id/labelE"
+                    android:background="@drawable/rounded_text"
+                    android:backgroundTint="@color/index_text_color"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp"
+                    android:text="@string/initial_val"
+                    android:textColor="@color/E"
+                    android:textSize="20sp"
+                    tools:targetApi="lollipop" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/column_diff"
+                android:layout_toEndOf="@id/E"
+                android:background="@drawable/rounded_text"
+                android:backgroundTint="@color/F"
+                tools:targetApi="lollipop">
+
+                <TextView
+                    android:id="@+id/labelF"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="6dp"
+                    android:background="@drawable/rounded_text"
+                    android:backgroundTint="@color/index_text_color"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp"
+                    android:text="F"
+                    android:textColor="@color/F"
+                    android:textSize="20sp"
+                    tools:targetApi="lollipop" />
+
+                <TextView
+                    android:id="@+id/scoreF"
+                    android:layout_width="@dimen/score_size"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_toEndOf="@id/labelF"
+                    android:background="@drawable/rounded_text"
+                    android:backgroundTint="@color/index_text_color"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp"
+                    android:text="@string/initial_val"
+                    android:textColor="@color/F"
+                    android:textSize="20sp"
+                    tools:targetApi="lollipop" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/line4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/line3"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/line_diff">
+
+            <RelativeLayout
+                android:id="@+id/G"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/column_diff"
+                android:background="@drawable/rounded_text"
+                android:backgroundTint="@color/G"
+                tools:targetApi="lollipop">
+
+                <TextView
+                    android:id="@+id/labelG"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="6dp"
+                    android:background="@drawable/rounded_text"
+                    android:backgroundTint="@color/index_text_color"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp"
+                    android:text="G"
+                    android:textColor="@color/G"
+                    android:textSize="20sp"
+                    tools:targetApi="lollipop" />
+
+                <TextView
+                    android:id="@+id/scoreG"
+                    android:layout_width="@dimen/score_size"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_toEndOf="@id/labelG"
+                    android:background="@drawable/rounded_text"
+                    android:backgroundTint="@color/index_text_color"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp"
+                    android:text="@string/initial_val"
+                    android:textColor="@color/G"
+                    android:textSize="20sp"
+                    tools:targetApi="lollipop" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/column_diff"
+                android:layout_toEndOf="@id/G"
+                android:background="@drawable/rounded_text"
+                android:backgroundTint="@color/H"
+                tools:targetApi="lollipop">
+
+
+                <TextView
+                    android:id="@+id/labelH"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="6dp"
+                    android:background="@drawable/rounded_text"
+                    android:backgroundTint="@color/index_text_color"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp"
+                    android:text="H"
+                    android:textColor="@color/H"
+                    android:textSize="20sp"
+                    tools:targetApi="lollipop" />
+
+                <TextView
+                    android:id="@+id/scoreH"
+                    android:layout_width="@dimen/score_size"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_toEndOf="@id/labelH"
+                    android:background="@drawable/rounded_text"
+                    android:backgroundTint="@color/index_text_color"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp"
+                    android:text="@string/initial_val"
+                    android:textColor="@color/H"
+                    android:textSize="20sp"
+                    tools:targetApi="lollipop" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/refresh"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/holeThing"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="33dp"
+        android:background="@drawable/rounded_text"
+        android:backgroundTint="@color/index_text_color"
+        android:text="@string/refresh"
+        tools:targetApi="lollipop" />
+</RelativeLayout>

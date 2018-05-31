@@ -1,0 +1,145 @@
+{
+  "project_info": {
+    "project_number": "286369794802",
+    "firebase_url": "https://acm-score-system-765ff.firebaseio.com",
+    "project_id": "acm-score-system-765ff",
+    "storage_bucket": "acm-score-system-765ff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:286369794802:android:ae793dba8d0cbd11",
+        "android_client_info": {
+          "package_name": "com.acm.adminscore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "286369794802-6trussfns4sl2vnu3m0red86f4bs2r7g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.acm.adminscore",
+            "certificate_hash": "4a6ec35b6a37d0a1fce3f23abfa8e88442b4b6ff"
+          }
+        },
+        {
+          "client_id": "286369794802-gubta6gajtu85f56k09ojolhsrimor03.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "286369794802-gubta6gajtu85f56k09ojolhsrimor03.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7AgvivtFhUOjWioRNIbol8AwbKdzLCVI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "286369794802-nodc3carhadhnfifng43r61mnohoegv6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ENISo.ACMScore"
+              }
+            },
+            {
+              "client_id": "286369794802-gubta6gajtu85f56k09ojolhsrimor03.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:286369794802:android:a2ae14bd5564ea1f",
+        "android_client_info": {
+          "package_name": "com.acm.scoresystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "286369794802-ts7bjhe7bo2b4fgrv1jl72fctrufhobr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.acm.scoresystem",
+            "certificate_hash": "99eab4cc02d30dee72c1081b1278362074cc765b"
+          }
+        },
+        {
+          "client_id": "286369794802-isfr85qsqa9elnddie666u7g5s6pthg0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.acm.scoresystem",
+            "certificate_hash": "b0f3e1287a7c2298e821c418914921f40c9ec369"
+          }
+        },
+        {
+          "client_id": "286369794802-5m6i2fd5t0hibbsbsihm76mgfcljnlv8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.acm.scoresystem",
+            "certificate_hash": "2114aa35139fc22073d659ce2cd0dd8577b047ef"
+          }
+        },
+        {
+          "client_id": "286369794802-spuai2rkdfgfhd93ia0k90of3fntt6bq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.acm.scoresystem",
+            "certificate_hash": "4a6ec35b6a37d0a1fce3f23abfa8e88442b4b6ff"
+          }
+        },
+        {
+          "client_id": "286369794802-gubta6gajtu85f56k09ojolhsrimor03.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "286369794802-gubta6gajtu85f56k09ojolhsrimor03.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7AgvivtFhUOjWioRNIbol8AwbKdzLCVI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "286369794802-nodc3carhadhnfifng43r61mnohoegv6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ENISo.ACMScore"
+              }
+            },
+            {
+              "client_id": "286369794802-gubta6gajtu85f56k09ojolhsrimor03.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.acm.scoresystem.TopCodersActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/background"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg" />
+
+    <TextView
+        android:id="@+id/topText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="@string/top_coders"
+        android:textColor="@color/index_text_color"
+        android:textSize="@dimen/titles_dimens" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:background="@drawable/rounded_text2"
+        android:backgroundTint="@color/index_text_color"
+        android:layout_below="@id/topText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        tools:targetApi="lollipop" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/refresh"
+        android:layout_below="@id/spinner"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="60dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_text2"
+        android:backgroundTint="#25000000"
+        android:padding="10dp"
+        android:scrollbars="none">
+
+        <TableLayout
+            android:id="@+id/topCodersTable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="0,1" />
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/refresh"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/rounded_text"
+        android:backgroundTint="@color/index_text_color"
+        android:text="@string/refresh"
+        tools:targetApi="lollipop" />
+</RelativeLayout>

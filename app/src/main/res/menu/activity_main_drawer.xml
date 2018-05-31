@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_score_fragment"
+            android:icon="@drawable/ic_casino_black_24dp"
+            android:title="Dashboard" />
+        <item
+            android:id="@+id/nav_top_coders_fragment"
+            android:title="Top Coders"
+            android:icon="@drawable/ic_face_black_40dp"/>
+        <item
+            android:id="@+id/nav_notification_fragment"
+            android:icon="@drawable/ic_notifications_active_black_24dp"
+            android:title="Notifications" />
+
+    </group>
+
+</menu>
