@@ -1,11 +1,13 @@
 package com.acm.scoresystem;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -51,6 +53,8 @@ public class TopCodersActivity extends AppCompatActivity {
     TableLayout top;
     Button refresh;
     Spinner spinner;
+    ProgressDialog progressDialog;
+
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     UserRepository repo;
@@ -82,7 +86,7 @@ public class TopCodersActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 messageFromSpinner = true;
-                new TopCodersTask().onPostExecute("");
+                refreshListView();
             }
 
             @Override
@@ -126,7 +130,7 @@ public class TopCodersActivity extends AppCompatActivity {
                     new ArrayList<>(schoolYears));
             spinner.setAdapter(adapter);
             messageFromFirebase = true;
-            new TopCodersTask().onPostExecute("");
+            refreshListView();
             refresh.performClick();
         } else {
             handlerError.sendMessage(new Message());
@@ -134,12 +138,80 @@ public class TopCodersActivity extends AppCompatActivity {
 
     }
 
+    public void refreshListView() {
+        top.removeAllViews();
+        Collections.sort(users, new Comparator<User>() {
+            @Override
+            public int compare(User o1, User o2) {
+                return o2.getScore() - o1.getScore();
+            }
+        });
+        int i = 1;
+        for (User user : users) {
+            if (!user.getSchoolYear().equals(spinner.getSelectedItem().toString())
+                    && !spinner.getSelectedItem().toString().equals("All")) continue;
+            String name = user.getFirstName() + " " + user.getLastName();
+            TableRow row = new TableRow(getApplicationContext());
+            row.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+            TextView column1 = new TextView(getApplicationContext());
+            TextView column2 = new TextView(getApplicationContext());
+            TextView column3 = new TextView(getApplicationContext());
+            TextView column4 = new TextView(getApplicationContext());
+            column1.setText(String.format(Locale.ENGLISH, "%d. %s", i, name));
+            i++;
+            column1.setTextSize(15);
+            column2.setText(String.valueOf(user.getProblemSolved()));
+            column2.setGravity(Gravity.END);
+            column2.setTextSize(15);
+            column2.setTextAlignment(View.TEXT_ALIGNMENT_GRAVITY);
+            column3.setText("    ");
+            column4.setText(String.valueOf(user.getScore()));
+            column4.setGravity(Gravity.END);
+            column4.setTextSize(15);
+            column4.setTextAlignment(View.TEXT_ALIGNMENT_GRAVITY);
+            if (toUp.contains(user.getPhoneNumber())) {
+                color = getResources().getColor(R.color.green);
+            } else {
+                color = getResources().getColor(R.color.index_text_color);
+            }
+            column1.setTextColor(color);
+            column2.setTextColor(color);
+            column4.setTextColor(color);
+            row.addView(column1);
+            row.addView(column2);
+            row.addView(column3);
+            row.addView(column4);
+            top.addView(row);
+        }
+
+        if (!messageFromFirebase && !messageFromSpinner) {
+            refresh.setEnabled(true);
+            refresh.setText(R.string.refresh_text);
+        } else if (messageFromFirebase && !messageFromSpinner) {
+            messageFromFirebase = false;
+        } else if (!messageFromFirebase) {
+            messageFromSpinner = false;
+        }
+    }
 
     private class TopCodersTask extends AsyncTask<Void, Integer, String> {
 
+        public TopCodersTask() {
+            progressDialog = new ProgressDialog(TopCodersActivity.this);
+            progressDialog.setMessage("Please wait");
+            progressDialog.setCancelable(false);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            progressDialog.show();
+        }
+
         @Override
         protected String doInBackground(Void... voids) {
+            int p = 0;
             for (User user : users) {
+                p++;
+                if (!user.getSchoolYear().equals(spinner.getSelectedItem().toString())
+                        && !spinner.getSelectedItem().toString().equals("All")) continue;
+                publishProgress((int) ((double) p / users.size() * 100.0));
                 HttpURLConnection urlConnection;
                 URL url;
                 String jsonString;
@@ -198,63 +270,15 @@ public class TopCodersActivity extends AppCompatActivity {
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
+            progressDialog.setProgress(values[0]);
         }
 
         @Override
-        protected void onPostExecute(String aString) {
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            progressDialog.dismiss();
             threadInWork = false;
-            top.removeAllViews();
-            Collections.sort(users, new Comparator<User>() {
-                @Override
-                public int compare(User o1, User o2) {
-                    return o2.getScore() - o1.getScore();
-                }
-            });
-            int i = 1;
-            for (User user : users) {
-                if (!user.getSchoolYear().equals(spinner.getSelectedItem().toString())
-                        && !spinner.getSelectedItem().toString().equals("All")) continue;
-                String name = user.getFirstName() + " " + user.getLastName();
-                TableRow row = new TableRow(getApplicationContext());
-                row.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-                TextView column1 = new TextView(getApplicationContext());
-                TextView column2 = new TextView(getApplicationContext());
-                TextView column3 = new TextView(getApplicationContext());
-                TextView column4 = new TextView(getApplicationContext());
-                column1.setText(String.format(Locale.ENGLISH, "%d. %s", i, name));
-                i++;
-                column1.setTextSize(15);
-                column2.setText(String.valueOf(user.getProblemSolved()));
-                column2.setGravity(Gravity.END);
-                column2.setTextSize(15);
-                column2.setTextAlignment(View.TEXT_ALIGNMENT_GRAVITY);
-                column3.setText("    ");
-                column4.setText(String.valueOf(user.getScore()));
-                column4.setGravity(Gravity.END);
-                column4.setTextSize(15);
-                column4.setTextAlignment(View.TEXT_ALIGNMENT_GRAVITY);
-                if (toUp.contains(user.getPhoneNumber())) {
-                    color = getResources().getColor(R.color.green);
-                } else {
-                    color = getResources().getColor(R.color.index_text_color);
-                }
-                column1.setTextColor(color);
-                column2.setTextColor(color);
-                column4.setTextColor(color);
-                row.addView(column1);
-                row.addView(column2);
-                row.addView(column3);
-                row.addView(column4);
-                top.addView(row);
-            }
-            if (!messageFromFirebase && !messageFromSpinner) {
-                refresh.setEnabled(true);
-                refresh.setText(R.string.refresh_text);
-            } else if (messageFromFirebase && !messageFromSpinner) {
-                messageFromFirebase = false;
-            } else if (!messageFromFirebase) {
-                messageFromSpinner = false;
-            }
+            refreshListView();
         }
     }
 

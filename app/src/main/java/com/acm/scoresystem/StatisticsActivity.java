@@ -1,6 +1,7 @@
 package com.acm.scoresystem;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
@@ -11,7 +12,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.acm.scoresystem.DAO.UserDAO;
 import com.acm.scoresystem.Model.User;
 import com.acm.scoresystem.Repository.UserRepository;
 import com.google.firebase.database.DatabaseReference;
@@ -44,6 +44,8 @@ public class StatisticsActivity extends AppCompatActivity {
     TextView scoreG;
     TextView scoreH;
     Button refresh;
+    ProgressDialog progressDialog;
+
     UserRepository repo;
     User user;
     Map<String, Integer> problemsCount;
@@ -88,7 +90,7 @@ public class StatisticsActivity extends AppCompatActivity {
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Statisticstask().execute();
+                new StatisticsTask().execute();
                 refresh.setEnabled(false);
                 refresh.setText(R.string.loading_text);
             }
@@ -115,7 +117,14 @@ public class StatisticsActivity extends AppCompatActivity {
         refresh.performClick();
     }
 
-    private class Statisticstask extends AsyncTask<Void, Integer, String> {
+    private class StatisticsTask extends AsyncTask<Void, Integer, String> {
+
+        public StatisticsTask() {
+            progressDialog = new ProgressDialog(StatisticsActivity.this);
+            progressDialog.setMessage("Please wait");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+        }
 
         @Override
         protected String doInBackground(Void... voids) {
@@ -178,6 +187,7 @@ public class StatisticsActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
+            progressDialog.dismiss();
             solvedProblems.setText(String.valueOf(user.getProblemSolved()));
             score.setText(String.valueOf(user.getScore()));
             scoreA.setText(String.valueOf(problemsCount.get("A")));

@@ -65,10 +65,14 @@ public class NotificationActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 notifs = dataSnapshot.getValue(new GenericTypeIndicator<ArrayList<Notification>>() {
                 });
-                Log.e("ok", "onDataChange: " + notifs);
                 if (notifs != null) {
                     notificationsTable.removeAllViews();
                     long notificationsNbr = repo.countItems();
+                    Log.e("ok", notifs.toString());
+                    Notification n = null;
+                    while (notifs.contains(n)){
+                        notifs.remove(n);
+                    }
                     for (int i = 0; i < notifs.size(); i++) {
                         TableRow row = new TableRow(getApplicationContext());
                         row.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
