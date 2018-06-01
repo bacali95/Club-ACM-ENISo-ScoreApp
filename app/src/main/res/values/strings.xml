@@ -37,5 +37,8 @@
     <string name="statistics">STATISTICS</string>
     <string name="refresh_text">REFRESH</string>
     <string name="loading_text">Loading …</string>
+    <string name="score">Score :</string>
+    <string name="solved">Solved :</string>
+    <string name="time">time</string>
 
 </resources>

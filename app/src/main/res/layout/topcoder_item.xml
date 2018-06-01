@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@drawable/item_shape"
+    android:backgroundTint="#25000000">
+
+    <TextView
+        android:id="@+id/rang"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:background="@drawable/item_shape"
+        android:gravity="center"
+        android:hint="1"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@id/rang"
+        android:gravity="center_vertical"
+        android:overScrollMode="always"
+        android:text="name"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/name"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="2dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/solvedText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/solved"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/solved"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@id/solvedText"
+            android:text="0"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/scoretext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@id/solved"
+            android:text="@string/score"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/score"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@id/scoretext"
+            android:text="0"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+</RelativeLayout>

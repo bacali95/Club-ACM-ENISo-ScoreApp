@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -50,7 +51,7 @@ import java.util.Set;
 
 public class TopCodersActivity extends AppCompatActivity {
 
-    TableLayout top;
+    ListView usersList;
     Button refresh;
     Spinner spinner;
     ProgressDialog progressDialog;
@@ -74,7 +75,7 @@ public class TopCodersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_top_coders);
 
         spinner = findViewById(R.id.spinner);
-        top = findViewById(R.id.topCodersTable);
+        usersList = findViewById(R.id.usersList);
         refresh = findViewById(R.id.refresh);
 
         repo = new UserRepository(this);
@@ -131,7 +132,7 @@ public class TopCodersActivity extends AppCompatActivity {
             spinner.setAdapter(adapter);
             messageFromFirebase = true;
             refreshListView();
-            refresh.performClick();
+            //refresh.performClick();
         } else {
             handlerError.sendMessage(new Message());
         }
@@ -139,50 +140,21 @@ public class TopCodersActivity extends AppCompatActivity {
     }
 
     public void refreshListView() {
-        top.removeAllViews();
-        Collections.sort(users, new Comparator<User>() {
+        List<User> localUsers = new ArrayList<>();
+        for (User user : users) {
+            if (!user.getSchoolYear().equals(spinner.getSelectedItem().toString())
+                    && !spinner.getSelectedItem().toString().equals("All")) continue;
+            localUsers.add(user);
+        }
+        Collections.sort(localUsers, new Comparator<User>() {
             @Override
             public int compare(User o1, User o2) {
                 return o2.getScore() - o1.getScore();
             }
         });
-        int i = 1;
-        for (User user : users) {
-            if (!user.getSchoolYear().equals(spinner.getSelectedItem().toString())
-                    && !spinner.getSelectedItem().toString().equals("All")) continue;
-            String name = user.getFirstName() + " " + user.getLastName();
-            TableRow row = new TableRow(getApplicationContext());
-            row.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-            TextView column1 = new TextView(getApplicationContext());
-            TextView column2 = new TextView(getApplicationContext());
-            TextView column3 = new TextView(getApplicationContext());
-            TextView column4 = new TextView(getApplicationContext());
-            column1.setText(String.format(Locale.ENGLISH, "%d. %s", i, name));
-            i++;
-            column1.setTextSize(15);
-            column2.setText(String.valueOf(user.getProblemSolved()));
-            column2.setGravity(Gravity.END);
-            column2.setTextSize(15);
-            column2.setTextAlignment(View.TEXT_ALIGNMENT_GRAVITY);
-            column3.setText("    ");
-            column4.setText(String.valueOf(user.getScore()));
-            column4.setGravity(Gravity.END);
-            column4.setTextSize(15);
-            column4.setTextAlignment(View.TEXT_ALIGNMENT_GRAVITY);
-            if (toUp.contains(user.getPhoneNumber())) {
-                color = getResources().getColor(R.color.green);
-            } else {
-                color = getResources().getColor(R.color.index_text_color);
-            }
-            column1.setTextColor(color);
-            column2.setTextColor(color);
-            column4.setTextColor(color);
-            row.addView(column1);
-            row.addView(column2);
-            row.addView(column3);
-            row.addView(column4);
-            top.addView(row);
-        }
+
+        TopCoderAdapter adapter = new TopCoderAdapter(getApplicationContext(), localUsers);
+        usersList.setAdapter(adapter);
 
         if (!messageFromFirebase && !messageFromSpinner) {
             refresh.setEnabled(true);
@@ -250,13 +222,12 @@ public class TopCodersActivity extends AppCompatActivity {
                         }
                     }
                     int i = set.size();
-                    DatabaseReference userReference;
                     if (i != user.getProblemSolved()) {
                         toUp.add(user.getPhoneNumber());
                         user.setProblemSolved(i);
                         user.calculScore(problemsCount);
                         repo.edit(user);
-                        userReference = database.getReference("users").child(String.valueOf(user.getPhoneNumber()));
+                        DatabaseReference userReference = database.getReference("users").child(String.valueOf(user.getPhoneNumber()));
                         userReference.setValue(user);
                     }
                 } catch (IOException | JSONException e) {

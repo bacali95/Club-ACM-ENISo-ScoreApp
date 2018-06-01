@@ -2,8 +2,9 @@ package com.acm.scoresystem;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
+import android.widget.Adapter;
+import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -25,7 +26,7 @@ public class NotificationActivity extends AppCompatActivity {
 
     NotificationRepository repo;
     List<Notification> notifs;
-    TableLayout notificationsTable;
+    ListView notificationsList;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference reference = database.getReference("notifications");
     public static List<Notification> notifications = new ArrayList<>();
@@ -36,64 +37,23 @@ public class NotificationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notification);
         repo = new NotificationRepository(this);
         final int color = getResources().getColor(R.color.index_text_color);
-        notificationsTable = findViewById(R.id.notificationsTable);
-        notificationsTable.removeAllViews();
+        notificationsList = findViewById(R.id.notificationsList);
         notifs = repo.getAll();
-        notifications = new LinkedList<>(notifs);
-        notificationsTable.removeAllViews();
-        for (Notification notification : notifs) {
-            TableRow row = new TableRow(getApplicationContext());
-            row.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-            TextView column = new TextView(getApplicationContext());
-            column.setText(notification.getSentTime());
-            column.setTextSize(18);
-            column.setTextColor(color);
-            column.setGravity(Gravity.END);
-            row.addView(column);
-            notificationsTable.addView(row, 0);
-            row = new TableRow(getApplicationContext());
-            row.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-            column = new TextView(getApplicationContext());
-            column.setText(notification.getBody());
-            column.setTextSize(18);
-            column.setTextColor(color);
-            row.addView(column);
-            notificationsTable.addView(row, 0);
-        }
+        notifications = new ArrayList<>(notifs);
+        NotificationAdapter adapter = new NotificationAdapter(getApplicationContext(),notifs);
+        notificationsList.setAdapter(adapter);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 notifs = dataSnapshot.getValue(new GenericTypeIndicator<ArrayList<Notification>>() {
                 });
                 if (notifs != null) {
-                    notificationsTable.removeAllViews();
-                    long notificationsNbr = repo.countItems();
-                    Log.e("ok", notifs.toString());
                     Notification n = null;
                     while (notifs.contains(n)){
                         notifs.remove(n);
                     }
-                    for (int i = 0; i < notifs.size(); i++) {
-                        TableRow row = new TableRow(getApplicationContext());
-                        row.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-                        TextView column = new TextView(getApplicationContext());
-                        column.setText(notifs.get(i).getSentTime());
-                        column.setTextSize(18);
-                        column.setTextColor(color);
-                        column.setGravity(Gravity.END);
-                        row.addView(column);
-                        notificationsTable.addView(row, 0);
-                        row = new TableRow(getApplicationContext());
-                        row.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-                        column = new TextView(getApplicationContext());
-                        column.setText(notifs.get(i).getBody());
-                        column.setTextSize(18);
-                        column.setTextColor(color);
-                        row.addView(column);
-                        notificationsTable.addView(row, 0);
-                        if (i >= notificationsNbr)
-                            repo.add(new Notification(notifs.get(i).getBody(), notifs.get(i).getSentTime()));
-                    }
+                    NotificationAdapter adapter = new NotificationAdapter(getApplicationContext(),notifs);
+                    notificationsList.setAdapter(adapter);
                 }
             }
 
