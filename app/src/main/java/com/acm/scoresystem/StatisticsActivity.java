@@ -7,11 +7,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.acm.scoresystem.Model.Contest;
 import com.acm.scoresystem.Model.User;
 import com.acm.scoresystem.Repository.UserRepository;
 import com.google.firebase.database.DatabaseReference;
@@ -24,12 +26,17 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 public class StatisticsActivity extends AppCompatActivity {
 
@@ -48,6 +55,7 @@ public class StatisticsActivity extends AppCompatActivity {
 
     UserRepository repo;
     User user;
+    Map<Integer, Contest> contests;
     Map<String, Integer> problemsCount;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference userReference;
@@ -90,9 +98,7 @@ public class StatisticsActivity extends AppCompatActivity {
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new StatisticsTask().execute();
-                refresh.setEnabled(false);
-                refresh.setText(R.string.loading_text);
+                new ContestTask().execute();
             }
         });
 
@@ -110,18 +116,22 @@ public class StatisticsActivity extends AppCompatActivity {
                 scoreH.setText("-");
                 refresh.setEnabled(true);
                 refresh.setText(R.string.refresh_text);
-                Toast.makeText(getApplicationContext(), "No Connection \uD83D\uDE41", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "There is something wrong \uD83D\uDE41, " +
+                        "please check your connection or try a gain !!", Toast.LENGTH_LONG).show();
             }
         };
 
         refresh.performClick();
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class StatisticsTask extends AsyncTask<Void, Integer, String> {
 
-        public StatisticsTask() {
+        private String TAG = StatisticsTask.class.getSimpleName();
+
+        StatisticsTask() {
             progressDialog = new ProgressDialog(StatisticsActivity.this);
-            progressDialog.setMessage("Please wait");
+            progressDialog.setMessage("Calculating...");
             progressDialog.setCancelable(false);
             progressDialog.show();
         }
@@ -160,14 +170,24 @@ public class StatisticsActivity extends AppCompatActivity {
                 problemsCount.put("F", 0);
                 problemsCount.put("G", 0);
                 problemsCount.put("H", 0);
-                for (int j = 0; j < jsonArray.length(); j++) {
-                    if (jsonArray.getJSONObject(j).getString("verdict").equals("OK")) {
-                        JSONObject pb = jsonArray.getJSONObject(j).getJSONObject("problem");
-                        String contestId = pb.getString("contestId");
-                        String pbIndex = pb.getString("index");
-                        set.add(contestId + "/" + pbIndex);
-                        if (problemsCount.containsKey(pbIndex)) {
-                            problemsCount.put(pbIndex, problemsCount.get(pbIndex) + 1);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject result = jsonArray.getJSONObject(i);
+                    int contestId = result.getInt("contestId");
+                    if (contests.containsKey(contestId) && result.getString("verdict").equals("OK")) {
+                        JSONObject problem = result.getJSONObject("problem");
+                        char pbIndex = problem.getString("index").charAt(0);
+                        Contest contest = contests.get(contestId);
+                        if (contest.getName().contains("div. 3")) {
+                            pbIndex = (char) Math.min('A', pbIndex - 2);
+                        } else if (contest.getName().contains("div. 1")) {
+                            pbIndex = (char) Math.max('H', pbIndex + 2);
+                        }
+                        if (!set.contains(problem.getString("name"))) {
+                            set.add(problem.getString("name"));
+                            String key = String.valueOf(pbIndex);
+                            if (problemsCount.containsKey(key)) {
+                                problemsCount.put(key, problemsCount.get(key) + 1);
+                            }
                         }
                     }
                 }
@@ -180,7 +200,9 @@ public class StatisticsActivity extends AppCompatActivity {
                     userReference.setValue(user);
                 }
             } catch (IOException | JSONException e) {
+                Log.e(TAG, "doInBackground: " + e.getMessage());
                 handlerError.sendMessage(new Message());
+                progressDialog.dismiss();
             }
             return null;
         }
@@ -200,6 +222,71 @@ public class StatisticsActivity extends AppCompatActivity {
             scoreH.setText(String.valueOf(problemsCount.get("H")));
             refresh.setEnabled(true);
             refresh.setText(R.string.refresh_text);
+        }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private class ContestTask extends AsyncTask<Void, Integer, String> {
+
+        private String TAG = ContestTask.class.getSimpleName();
+
+        ContestTask() {
+            progressDialog = new ProgressDialog(StatisticsActivity.this);
+            progressDialog.setMessage("Loading Data...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            HttpURLConnection urlConnection;
+            URL url;
+            String jsonString;
+            try {
+                url = new URL("http://codeforces.com/api/contest.list?gym=false");
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("GET");
+                urlConnection.setReadTimeout(10000);
+                urlConnection.setConnectTimeout(15000);
+                urlConnection.setDoOutput(true);
+                urlConnection.connect();
+
+                BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
+                StringBuilder sb = new StringBuilder();
+
+                String line;
+                while ((line = br.readLine()) != null) {
+                    sb.append(line).append("\n");
+                }
+                br.close();
+                jsonString = sb.toString();
+                JSONArray jsonArray = new JSONObject(jsonString).getJSONArray("result");
+                contests = new TreeMap<>();
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject obj = jsonArray.getJSONObject(i);
+                    contests.put(obj.getInt("id"), new Contest(obj.getInt("id"),
+                            obj.getString("name"),
+                            obj.getString("type"),
+                            obj.getString("phase"),
+                            obj.getBoolean("frozen"),
+                            obj.getLong("durationSeconds"),
+                            obj.getLong("startTimeSeconds"),
+                            obj.getLong("relativeTimeSeconds")));
+                }
+            } catch (IOException | JSONException e) {
+                Log.e(TAG, "doInBackground: " + e.getMessage());
+                handlerError.sendMessage(new Message());
+                progressDialog.dismiss();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            progressDialog.dismiss();
+            refresh.setEnabled(false);
+            refresh.setText(R.string.loading_text);
+            new StatisticsTask().execute();
         }
     }
 }

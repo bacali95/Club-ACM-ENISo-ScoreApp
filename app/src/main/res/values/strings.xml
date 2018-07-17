@@ -40,5 +40,17 @@
     <string name="score">Score :</string>
     <string name="solved">Solved :</string>
     <string name="time">time</string>
+    <string name="hint_text">0</string>
+    <string name="hint_name">name</string>
+    <string name="background_text">Background</string>
+    <string name="a_text">A</string>
+    <string name="text_c">C</string>
+    <string name="text_b">B</string>
+    <string name="text_d">D</string>
+    <string name="text_e">E</string>
+    <string name="text_f">F</string>
+    <string name="text_g">G</string>
+    <string name="text_h">H</string>
+    <string name="body_hint">body</string>
 
 </resources>

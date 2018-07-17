@@ -43,10 +43,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginEnd="40dp"
         android:layout_marginTop="10dp"
-        android:scrollbars="none"
         android:divider="@android:color/transparent"
-        android:dividerHeight="5dp"
-        />
+        android:dividerHeight="3dp"
+        android:scrollbars="none" />
 
     <Button
         android:id="@+id/refresh"

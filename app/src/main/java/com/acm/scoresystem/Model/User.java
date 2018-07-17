@@ -1,9 +1,12 @@
 package com.acm.scoresystem.Model;
 
+import android.util.Log;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class User {
+    private static final String TAG = User.class.getSimpleName();
     private String firstName;
     private String lastName;
     private String email;
@@ -129,6 +132,7 @@ public class User {
     }
 
     public void calculScore(Map<String, Integer> problemsCount) {
+        Log.e(TAG, "calculScore: "+problemsCount+" "+firstName);
         Map<String, Integer> echelle = new HashMap<>();
         echelle.put("A", 1);
         echelle.put("B", 2);

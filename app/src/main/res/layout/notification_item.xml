@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/item_shape"
-    android:backgroundTint="#25000000">
+    android:backgroundTint="#25000000"
+    tools:targetApi="lollipop">
 
     <TextView
         android:id="@+id/body"
@@ -12,7 +14,7 @@
         android:gravity="center_vertical"
         android:layout_marginStart="25dp"
         android:layout_marginTop="5dp"
-        android:text="body"
+        android:hint="@string/body_hint"
         android:textColor="@color/white"
         android:textSize="20sp" />
 

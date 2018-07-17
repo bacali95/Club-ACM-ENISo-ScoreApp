@@ -141,7 +141,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:paddingEnd="5dp"
                     android:paddingStart="5dp"
-                    android:text="A"
+                    android:text="@string/a_text"
                     android:textColor="@color/A"
                     android:textSize="20sp"
                     tools:targetApi="lollipop" />
@@ -183,7 +183,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:paddingEnd="5dp"
                     android:paddingStart="5dp"
-                    android:text="B"
+                    android:text="@string/text_b"
                     android:textColor="@color/B"
                     android:textSize="20sp"
                     tools:targetApi="lollipop" />
@@ -235,7 +235,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:paddingEnd="5dp"
                     android:paddingStart="5dp"
-                    android:text="C"
+                    android:text="@string/text_c"
                     android:textColor="@color/C"
                     android:textSize="20sp"
                     tools:targetApi="lollipop" />
@@ -277,7 +277,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:paddingEnd="5dp"
                     android:paddingStart="5dp"
-                    android:text="D"
+                    android:text="@string/text_d"
                     android:textColor="@color/D"
                     android:textSize="20sp"
                     tools:targetApi="lollipop" />
@@ -328,7 +328,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:paddingEnd="5dp"
                     android:paddingStart="5dp"
-                    android:text="E"
+                    android:text="@string/text_e"
                     android:textColor="@color/E"
                     android:textSize="20sp"
                     tools:targetApi="lollipop" />
@@ -370,7 +370,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:paddingEnd="5dp"
                     android:paddingStart="5dp"
-                    android:text="F"
+                    android:text="@string/text_f"
                     android:textColor="@color/F"
                     android:textSize="20sp"
                     tools:targetApi="lollipop" />
@@ -421,7 +421,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:paddingEnd="5dp"
                     android:paddingStart="5dp"
-                    android:text="G"
+                    android:text="@string/text_g"
                     android:textColor="@color/G"
                     android:textSize="20sp"
                     tools:targetApi="lollipop" />
@@ -464,7 +464,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:paddingEnd="5dp"
                     android:paddingStart="5dp"
-                    android:text="H"
+                    android:text="@string/text_h"
                     android:textColor="@color/H"
                     android:textSize="20sp"
                     tools:targetApi="lollipop" />
